@@ -49,4 +49,20 @@ func main() {
 	if verbose >= 2 {
 		fmt.Println("Balance:", balance)
 	}
+
+	// check if balance is below critical threshold
+	if balance <= crit_level {
+		fmt.Printf("Balance Critical - $%.2f\n", balance)
+		os.Exit(2)
+	}
+
+	// check if balance is below warning threshold
+	if balance <= warn_level {
+		fmt.Printf("Balance Warning - $%.2f\n", balance)
+		os.Exit(1)
+	}
+
+	// balance must be ok
+	fmt.Printf("Balance OK - $%.2f\n", balance)
+	os.Exit(0)
 }
