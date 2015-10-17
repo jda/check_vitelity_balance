@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 type VitelityResponse struct {
@@ -59,7 +60,9 @@ func get_balance(user string, pass string) (float64, error) {
 		return 0, fmt.Errorf("Vitelity API Response: %s", res.Status)
 	}
 
-	balance, err := strconv.ParseFloat(res.Response, 2)
+	// remove comma because vitelity response is US formatted string, not decimal.
+	balanceWithoutComma := strings.Replace(res.Response, ",", "", -1)
+	balance, err := strconv.ParseFloat(balanceWithoutComma, 2)
 	if err != nil {
 		return 0, fmt.Errorf("Can't parse API responce for balance: %s", res.Response)
 	}
