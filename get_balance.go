@@ -64,7 +64,7 @@ func get_balance(user string, pass string) (float64, error) {
 	balanceWithoutComma := strings.Replace(res.Response, ",", "", -1)
 	balance, err := strconv.ParseFloat(balanceWithoutComma, 2)
 	if err != nil {
-		return 0, fmt.Errorf("Can't parse API responce for balance: %s", res.Response)
+		return 0, fmt.Errorf("Can't parse API response for balance: %s", res.Response)
 	}
 
 	return balance, nil
